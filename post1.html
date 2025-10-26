@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Staying Fit While Working from Home • Health & Fitness</title>
+  <meta name="description" content="Simple, effective ways to stay active, eat well, and feel better while working from home." />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <style>
+    /* --- Sticky footer layout --- */
+    html, body { height: 100%; }
+    :root { --nav-h: 64px; } /* updated by JS to exact height */
+    body{
+      display:flex; flex-direction:column; min-height:100vh;
+      font-family:'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+      background: burlywood url(images/fit.jpg) center/cover no-repeat fixed;
+      margin:0;
+      padding-top: var(--nav-h); /* keep content below fixed navbar */
+    }
+    header{ flex-shrink:0; }
+    main{ flex:1 0 auto; }
+    footer{ flex-shrink:0; }
+
+    /* ===== NAVBAR (fixed, compact, wraps; never hides) ===== */
+    .navbar{
+      position: fixed; top:0; left:0; right:0; z-index:1030;
+      background:#1b1f27;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      padding:.4rem 0;
+    }
+    .navbar .container{ max-width:1100px; }
+    .navbar-brand{ color:#fff !important; font-weight:700; font-size:1rem; letter-spacing:.2px; }
+    .navbar-toggler{ border-color:rgba(255,255,255,.25); }
+    .navbar-toggler-icon{ filter: invert(1) grayscale(1); }
+
+    #navMenu .navbar-nav{
+      width:100%; justify-content:center; flex-wrap:wrap; /* wrap to second line if needed */
+      column-gap:.35rem; row-gap:.35rem;
+    }
+    .navbar-nav .nav-link{
+      white-space:nowrap; color:#e9edf6 !important; font-weight:600;
+      font-size:.92rem; padding:.3rem .55rem !important; border-radius:.45rem;
+      transition: background .18s ease, color .18s ease;
+    }
+    .navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus{ background: goldenrod; color:#fff !important; }
+
+    .navbar-collapse{ max-height: calc(100vh - var(--nav-h)); overflow-y:auto; }
+
+    @media (max-width: 991.98px){
+      #navMenu .navbar-nav{ justify-content:flex-start; row-gap:.25rem; }
+      .navbar-nav .nav-link{ width:100%; border-radius:.35rem; font-size:1rem; padding:.5rem .75rem !important; }
+    }
+
+    /* ===== READING PROGRESS (under navbar) ===== */
+    .progress-wrap{
+      position: fixed; top: var(--nav-h); left:0; right:0; z-index:1025;
+      height: 4px; background: transparent;
+    }
+    .progress-bar{
+      height: 4px; width: 0%;
+      background: linear-gradient(90deg, #ffd166, #0d6efd);
+      transition: width .1s linear;
+    }
+
+    /* ===== HERO ===== */
+    .hero{
+      position:relative; color:#fff; isolation:isolate; text-align:center;
+      padding: 48px 16px;
+      background:
+        linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.6)),
+        url('https://images.unsplash.com/photo-1483721310020-03333e577078?q=80&w=1600&auto=format&fit=crop')
+        center/cover no-repeat;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .hero h1{ font-size:clamp(1.6rem,3vw,2.4rem); margin-bottom:.35rem; text-shadow:2px 2px 4px rgba(0,0,0,.6); }
+    .post-meta{ opacity:.95; font-size:.95rem; }
+
+    /* ===== ARTICLE ===== */
+    .article-wrap{ padding: 20px 0 32px; }
+    .article{
+      background: rgba(255,255,255,.97);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:14px; box-shadow:0 6px 14px rgba(0,0,0,.1);
+      max-width: 860px; margin: -28px auto 0; /* pull up under hero */
+      padding: 18px 18px 8px;
+    }
+    @media (min-width: 768px){
+      .article{ padding: 22px 28px 12px; }
+    }
+    .article .lead{ font-size:1.05rem; color:#334155; }
+    .article h2, .article h3, .article h4{
+      font-weight:800; margin-top:1.25rem; margin-bottom:.5rem;
+      scroll-margin-top: calc(var(--nav-h) + 24px);
+    }
+    .article p{ margin: .5rem 0 1rem; line-height:1.75; color:#1f2937; }
+    .checklist li{ margin-bottom:.5rem; }
+    .blockquote{
+      background:#f8fafc; border-left:4px solid #0d6efd; padding:.75rem .9rem; border-radius:.35rem;
+      color:#334155; margin:1rem 0;
+    }
+    .divider{ height:1px; background:#e5e7eb; margin: 1rem 0; }
+
+    /* Share */
+    .share{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.75rem; }
+    .share a{
+      font-size:.9rem; text-decoration:none; border:1px solid #e5e7eb; background:#fff;
+      padding:.35rem .6rem; border-radius:.6rem;
+    }
+    .share a:hover{ background:#f8fafc; }
+
+    /* Footer */
+    footer{ background:whitesmoke; color:black; text-align:center; padding:12px; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / NAV (fixed) -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Health &amp; Fitness</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="nutrition.html">Nutrition Tips</a></li>
+          <li class="nav-item"><a class="nav-link" href="workouts.html">Workout Routines</a></li>
+          <li class="nav-item"><a class="nav-link" href="mental-health.html">Mental Wellness</a></li>
+          <li class="nav-item"><a class="nav-link" href="weight-loss.html">Weight Loss Tips</a></li>
+          <li class="nav-item"><a class="nav-link" href="yoga.html">Yoga Guides</a></li>
+          <li class="nav-item"><a class="nav-link" href="recipes.html">Healthy Recipes</a></li>
+          <li class="nav-item"><a class="nav-link" href="post1.html">Home Workouts</a></li>
+          <li class="nav-item"><a class="nav-link" href="post2.html">Stay Active</a></li>
+          <li class="nav-item"><a class="nav-link" href="post3.html">Meals</a></li>
+          <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy Policy</a></li>
+          <li class="nav-item"><a class="nav-link" href="terms.html">Terms &amp; Conditions</a></li>
+          <li class="nav-item"><a class="nav-link" href="sitemap.html">Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Reading progress -->
+  <div class="progress-wrap"><div class="progress-bar" id="readProgress"></div></div>
+
+  <!-- MAIN -->
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <h1>Staying Fit While Working from Home</h1>
+        <div class="post-meta">
+          <span><strong>Published:</strong> July 26, 2025</span>
+          • <span id="readTime">~3–4 min read</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARTICLE -->
+    <section class="article-wrap">
+      <article class="article">
+        <p class="lead">
+          Remote work is here to stay, but hours at a desk can drain energy. Use these quick, proven habits to
+          keep your body moving and your mind sharp—without fancy equipment.
+        </p>
+
+        <div class="divider"></div>
+
+        <h2 id="move">1) Start Your Day with Movement</h2>
+        <p>
+          Before opening email, take a brisk 10–20 minute walk or try a short yoga flow.
+          Morning movement boosts alertness, improves mood, and sets the tone for a productive day.
+        </p>
+        <ul class="checklist">
+          <li>Keep shoes and a water bottle by the door the night before.</li>
+          <li>Use a simple timer (10 or 15 minutes) and just get started.</li>
+        </ul>
+
+        <h2 id="stand">2) Alternate Sitting and Standing</h2>
+        <p>
+          Long sitting compresses hips and slows circulation. If you have a standing desk, alternate every 30–60 minutes.
+          No desk? Use a high counter with an external keyboard for short blocks.
+        </p>
+        <div class="blockquote">
+          Tip: Set a repeating reminder to stand, stretch your hip flexors, and roll your shoulders.
+        </div>
+
+        <h2 id="quick">3) Quick Home Workouts</h2>
+        <p>
+          You can train effectively with bodyweight. Cycle through squats, push‑ups, glute bridges, and planks
+          for 10–20 minutes. Keep rest short and form solid.
+        </p>
+        <ul class="checklist">
+          <li>Beginners: 4 rounds — 10 squats, 8 push‑ups (incline ok), 20‑sec plank.</li>
+          <li>Intermediate: 5 rounds — 15 squats, 12 push‑ups, 30‑sec plank.</li>
+        </ul>
+
+        <h2 id="meals">4) Plan Your Meals</h2>
+        <p>
+          Working near the kitchen can lead to grazing. Plan simple lunches and stock high‑protein snacks
+          (Greek yogurt, nuts, hummus + veggies). Drink water before meals to help with appetite.
+        </p>
+
+        <div class="divider"></div>
+
+        <h3>Keep It Simple</h3>
+        <p>
+          Consistency beats intensity. Start small, repeat daily, and build from there.
+          Even a 1% improvement each day compounds quickly.
+        </p>
+
+        <!-- Share -->
+        <div class="share">
+          <a href="#" id="shareX" aria-label="Share on X">Share on X</a>
+          <a href="#" id="shareFB" aria-label="Share on Facebook">Share on Facebook</a>
+          <a href="#" id="shareWA" aria-label="Share on WhatsApp">Share on WhatsApp</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Health &amp; Fitness Blog</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Highlight active nav by URL
+    (function(){
+      const current = location.pathname.split('/').pop() || 'post1.html';
+      document.querySelectorAll('.navbar-nav .nav-link').forEach(a=>{
+        if(a.getAttribute('href') && a.getAttribute('href').endsWith(current)){
+          a.classList.add('active');
+        }
+      });
+    })();
+
+    // Keep navbar fixed & ensure correct top spacing (handles wrap and mobile collapse)
+    (function(){
+      const navbar = document.querySelector('.navbar');
+      const setSpace = () => {
+        const h = navbar.offsetHeight;
+        document.documentElement.style.setProperty('--nav-h', h + 'px');
+        // Also place progress bar right under navbar
+        const prog = document.querySelector('.progress-wrap');
+        if (prog) prog.style.top = h + 'px';
+      };
+      window.addEventListener('load', setSpace);
+      window.addEventListener('resize', setSpace);
+      const collapse = document.getElementById('navMenu');
+      collapse.addEventListener('shown.bs.collapse', setSpace);
+      collapse.addEventListener('hidden.bs.collapse', setSpace);
+      let lastH = 0;
+      setInterval(() => {
+        const h = navbar.offsetHeight;
+        if (h !== lastH) { lastH = h; setSpace(); }
+      }, 600);
+    })();
+
+    // Estimate reading time (200 wpm)
+    (function(){
+      const article = document.querySelector('.article');
+      const text = article ? article.innerText : '';
+      const words = text.trim().split(/\s+/).length;
+      const mins = Math.max(1, Math.round(words / 200));
+      const rt = document.getElementById('readTime');
+      if (rt) rt.textContent = `~${mins} min read`;
+    })();
+
+    // Reading progress bar
+    (function(){
+      const bar = document.getElementById('readProgress');
+      const main = document.querySelector('main');
+      function update(){
+        const docH = document.body.scrollHeight - window.innerHeight;
+        const scrolled = window.scrollY;
+        const pct = docH > 0 ? (scrolled / docH) * 100 : 0;
+        bar.style.width = pct + '%';
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('load', update);
+      window.addEventListener('resize', update);
+    })();
+
+    // Simple share links
+    (function(){
+      const url = encodeURIComponent(location.href);
+      const text = encodeURIComponent('Staying Fit While Working from Home');
+      const x = document.getElementById('shareX');
+      const fb = document.getElementById('shareFB');
+      const wa = document.getElementById('shareWA');
+      if (x)  x.addEventListener('click', e => { e.preventDefault(); window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`,'_blank'); });
+      if (fb) fb.addEventListener('click', e => { e.preventDefault(); window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`,'_blank'); });
+      if (wa) wa.addEventListener('click', e => { e.preventDefault(); window.open(`https://api.whatsapp.com/send?text=${text}%20${url}`,'_blank'); });
+    })();
+  </script>
+</body>
+</html>

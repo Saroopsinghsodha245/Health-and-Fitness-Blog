@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Healthy Recipes • Health & Fitness</title>
+  <meta name="description" content="Quick, healthy recipes shown as photo cards — easy to cook and delicious." />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <style>
+    /* --- Sticky footer layout --- */
+    html, body { height: 100%; }
+    :root { --nav-h: 64px; } /* updated by JS to exact height */
+    body{
+      display:flex; flex-direction:column; min-height:100vh;
+      font-family:'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+      background: burlywood url(images/fit.jpg) center/cover no-repeat fixed;
+      margin:0;
+      padding-top: var(--nav-h); /* keep content below fixed navbar */
+    }
+    header{ flex-shrink:0; }
+    main{ flex:1 0 auto; }
+    footer{ flex-shrink:0; }
+
+    /* ===== NAVBAR (fixed, compact, wraps; never hides) ===== */
+    .navbar{
+      position: fixed; top:0; left:0; right:0; z-index:1030;
+      background:#1b1f27;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      padding:.4rem 0;
+    }
+    .navbar .container{ max-width:1100px; }
+    .navbar-brand{ color:#fff !important; font-weight:700; font-size:1rem; letter-spacing:.2px; }
+    .navbar-toggler{ border-color:rgba(255,255,255,.25); }
+    .navbar-toggler-icon{ filter: invert(1) grayscale(1); }
+
+    #navMenu .navbar-nav{
+      width:100%; justify-content:center; flex-wrap:wrap; /* wrap if needed */
+      column-gap:.35rem; row-gap:.35rem;
+    }
+    .navbar-nav .nav-link{
+      white-space:nowrap; color:#e9edf6 !important; font-weight:600;
+      font-size:.92rem; padding:.3rem .55rem !important; border-radius:.45rem;
+      transition: background .18s ease, color .18s ease;
+    }
+    .navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus{ background: goldenrod; color:#fff !important; }
+
+    .navbar-collapse{ max-height: calc(100vh - var(--nav-h)); overflow-y:auto; }
+
+    @media (max-width: 991.98px){
+      #navMenu .navbar-nav{ justify-content:flex-start; row-gap:.25rem; }
+      .navbar-nav .nav-link{ width:100%; border-radius:.35rem; font-size:1rem; padding:.5rem .75rem !important; }
+    }
+
+    /* ===== HERO ===== */
+    .hero{
+      position:relative; color:#fff; text-align:center; isolation:isolate;
+      padding:48px 16px;
+      background:
+        linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.55)),
+        url('https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=1600&auto=format&fit=crop')
+        center/cover no-repeat;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .hero h1{ font-size:clamp(1.7rem, 3vw, 2.3rem); margin-bottom:.35rem; text-shadow:2px 2px 4px rgba(0,0,0,.6); }
+    .hero p{ margin:0; opacity:.95; }
+
+    /* ===== RECIPE CARDS GRID ===== */
+    .recipes-section{ padding:20px 0 32px; }
+    .recipes-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .card-recipe{
+      background: rgba(255,255,255,.96);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:14px; overflow:hidden;
+      box-shadow:0 6px 14px rgba(0,0,0,.1);
+      transition: transform .18s ease, box-shadow .18s ease;
+      height:100%;
+      display:flex; flex-direction:column;
+    }
+    .card-recipe:hover{ transform: translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,.14); }
+    .recipe-img{ width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
+    .recipe-body{ padding:14px; }
+    .recipe-title{ font-weight:800; font-size:1.05rem; margin:0 0 .35rem; }
+    .recipe-text{ margin:0; color:#475569; }
+    .recipe-tags{ margin-top:.5rem; display:flex; flex-wrap:wrap; gap:.35rem; }
+    .tag{
+      font-size:.75rem; background:#f1f5f9; border:1px solid #e5e7eb; border-radius:9999px;
+      padding:.15rem .5rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer{ background:whitesmoke; color:black; text-align:center; padding:12px; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / NAV -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Health &amp; Fitness</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="nutrition.html">Nutrition Tips</a></li>
+          <li class="nav-item"><a class="nav-link" href="workouts.html">Workout Routines</a></li>
+          <li class="nav-item"><a class="nav-link" href="mental-health.html">Mental Wellness</a></li>
+          <li class="nav-item"><a class="nav-link" href="weight-loss.html">Weight Loss Tips</a></li>
+          <li class="nav-item"><a class="nav-link" href="yoga.html">Yoga Guides</a></li>
+          <li class="nav-item"><a class="nav-link" href="recipes.html">Healthy Recipes</a></li>
+          <li class="nav-item"><a class="nav-link" href="post1.html">Home Workouts</a></li>
+          <li class="nav-item"><a class="nav-link" href="post2.html">Stay Active</a></li>
+          <li class="nav-item"><a class="nav-link" href="post3.html">Meals</a></li>
+          <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy Policy</a></li>
+          <li class="nav-item"><a class="nav-link" href="terms.html">Terms &amp; Conditions</a></li>
+          <li class="nav-item"><a class="nav-link" href="sitemap.html">Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <h1>Healthy Recipes</h1>
+        <p>Quick, tasty ideas you can cook today.</p>
+      </div>
+    </section>
+
+    <!-- RECIPE CARDS (9 total) -->
+    <section class="recipes-section">
+      <div class="container" style="max-width:1100px;">
+        <div class="recipes-grid">
+
+          <!-- 1 Quinoa Veggie Bowl -->
+          <article class="card-recipe">
+            <img class="recipe-img" src="images/bowl.jpg" alt="Quinoa veggie bowl">
+            <div class="recipe-body">
+              <h6 class="recipe-title">🥗 Quinoa Veggie Bowl</h6>
+              <p class="recipe-text">Cook quinoa; add roasted broccoli, peppers, carrots; drizzle tahini‑lemon.</p>
+              <div class="recipe-tags">
+                <span class="tag">High‑fiber</span><span class="tag">Vegan</span><span class="tag">30 min</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2 Greek Yogurt Parfait -->
+          <article class="card-recipe">
+            <img class="recipe-img" src="images/yogurt.jpg" alt="Greek yogurt parfait with berries">
+            <div class="recipe-body">
+              <h6 class="recipe-title">🍓 Greek Yogurt Parfait</h6>
+              <p class="recipe-text">Layer yogurt, granola, strawberries; finish with a drizzle of honey.</p>
+              <div class="recipe-tags">
+                <span class="tag">High‑protein</span><span class="tag">5 min</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3 Avocado Toast with Egg -->
+          <article class="card-recipe">
+            <img class="recipe-img" src="images/avacado.jpg" alt="Avocado toast with egg">
+            <div class="recipe-body">
+              <h6 class="recipe-title">🥑 Avocado Toast with Egg</h6>
+              <p class="recipe-text">Mash avocado on whole‑grain toast; top with poached egg & chili flakes.</p>
+              <div class="recipe-tags">
+                <span class="tag">Healthy fats</span><span class="tag">10 min</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4 Chickpea Salad -->
+          <article class="card-recipe">
+            <img class="recipe-img" src="images/chicjpea.jpg" alt="Chickpea salad with veggies">
+            <div class="recipe-body">
+              <h6 class="recipe-title">🍛 Chickpea Salad</h6>
+              <p class="recipe-text">Mix chickpeas, cucumber, tomato, red onion; add lemon & olive oil.</p>
+              <div class="recipe-tags">
+                <span class="tag">Plant‑protein</span><span class="tag">15 min</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5 High‑Protein Overnight Oats -->
+          <article class="card-recipe">
+            <img class="recipe-img" src="images/highprotien.jpg" alt="Overnight oats with berries">
+            <div class="recipe-body">
+              <h6 class="recipe-title">🥣 High‑Protein Overnight Oats</h6>
+              <p class="recipe-text">Mix oats, milk or yogurt, chia & protein; chill overnight; top with berries.</p>
+              <div class="recipe-tags">
+                <span class="tag">High‑protein</span><span class="tag">No‑cook</span><span class="tag">5 min prep</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6 One‑Pan Chicken & Veg -->
+          <article class="card-recipe">
+            <img class="recipe-img" src="images/pan.jpg" alt="One-pan chicken and vegetables">
+            <div class="recipe-body">
+              <h6 class="recipe-title">🍗 One‑Pan Chicken & Veg</h6>
+              <p class="recipe-text">Season chicken, scatter mixed veggies, roast on one tray until golden.</p>
+              <div class="recipe-tags">
+                <span class="tag">Meal‑prep</span><span class="tag">High‑protein</span><span class="tag">35–40 min</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7 Green Smoothie -->
+          <article class="card-recipe">
+            <img class="recipe-img" src="images/smoothie.jpg" alt="Green smoothie in jar">
+            <div class="recipe-body">
+              <h6 class="recipe-title">🥬 Green Smoothie</h6>
+              <p class="recipe-text">Blend spinach, banana, frozen mango, yogurt (or milk), lemon.</p>
+              <div class="recipe-tags">
+                <span class="tag">Vegetarian</span><span class="tag">5 min</span><span class="tag">On‑the‑go</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 8 Baked Salmon & Veg -->
+          <article class="card-recipe">
+            <img class="recipe-img" src="images/salmoon.jpg" alt="Baked salmon with asparagus">
+            <div class="recipe-body">
+              <h6 class="recipe-title">🐟 Baked Salmon & Veg</h6>
+              <p class="recipe-text">Top salmon with lemon & herbs; bake with asparagus till flaky.</p>
+              <div class="recipe-tags">
+                <span class="tag">Omega‑3</span><span class="tag">High‑protein</span><span class="tag">20–25 min</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 9 Hearty Lentil Soup -->
+          <article class="card-recipe">
+            <img class="recipe-img" src="images/soup.jpg" alt="Bowl of lentil soup">
+            <div class="recipe-body">
+              <h6 class="recipe-title">🍲 Hearty Lentil Soup</h6>
+              <p class="recipe-text">Simmer lentils with onion, carrot, tomato & spices; finish with lemon.</p>
+              <div class="recipe-tags">
+                <span class="tag">Vegan</span><span class="tag">High‑fiber</span><span class="tag">30–35 min</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Health &amp; Fitness Blog</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Highlight "Healthy Recipes" in nav based on URL
+    (function(){
+      const current = location.pathname.split('/').pop() || 'recipes.html';
+      document.querySelectorAll('.navbar-nav .nav-link').forEach(a=>{
+        if(a.getAttribute('href') && a.getAttribute('href').endsWith(current)){
+          a.classList.add('active');
+        }
+      });
+    })();
+
+    // Keep navbar fixed & ensure correct top spacing (handles wrap and mobile collapse)
+    (function(){
+      const navbar = document.querySelector('.navbar');
+      const setSpace = () => {
+        const h = navbar.offsetHeight;
+        document.documentElement.style.setProperty('--nav-h', h + 'px');
+      };
+      window.addEventListener('load', setSpace);
+      window.addEventListener('resize', setSpace);
+      const collapse = document.getElementById('navMenu');
+      collapse.addEventListener('shown.bs.collapse', setSpace);
+      collapse.addEventListener('hidden.bs.collapse', setSpace);
+      let lastH = 0;
+      setInterval(() => {
+        const h = navbar.offsetHeight;
+        if (h !== lastH) { lastH = h; setSpace(); }
+      }, 600);
+    })();
+  </script>
+</body>
+</html>

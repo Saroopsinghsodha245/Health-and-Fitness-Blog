@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Blog • Health & Fitness</title>
+  <meta name="description" content="Read the latest posts from Health & Fitness: workouts, nutrition, wellness and more." />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <style>
+    /* --- Sticky footer layout --- */
+    html, body { height: 100%; }
+    :root { --nav-h: 64px; }  /* will be updated by JS exactly */
+    body {
+      display: flex; flex-direction: column; min-height: 100vh;
+      font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+      background: burlywood url(images/fit.jpg) center/cover no-repeat fixed;
+      margin: 0;
+      padding-top: var(--nav-h); /* ensure content isn't behind fixed navbar */
+    }
+    header { flex-shrink: 0; }
+    main { flex: 1 0 auto; }
+    footer { flex-shrink: 0; }
+
+    /* ===== NAVBAR (fixed, compact, wraps; never hides) ===== */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1030;
+      background: #1b1f27;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      padding: .4rem 0;
+    }
+    .navbar .container { max-width: 1100px; }
+    .navbar-brand { color:#fff !important; font-weight:700; font-size:1rem; letter-spacing:.2px; }
+    .navbar-toggler { border-color: rgba(255,255,255,.25); }
+    .navbar-toggler-icon { filter: invert(1) grayscale(1); }
+
+    #navMenu .navbar-nav {
+      width:100%; justify-content:center; flex-wrap:wrap;  /* wrap to second line if needed */
+      column-gap:.35rem; row-gap:.35rem;
+    }
+    .navbar-nav .nav-link{
+      white-space:nowrap; color:#e9edf6 !important; font-weight:600;
+      font-size:.92rem; padding:.3rem .55rem !important; border-radius:.45rem;
+      transition: background .18s ease, color .18s ease;
+    }
+    .navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus { background: goldenrod; color:#fff !important; }
+
+    /* Collapsed (mobile) menu can scroll if tall */
+    .navbar-collapse {
+      max-height: calc(100vh - var(--nav-h));
+      overflow-y: auto;
+    }
+
+    @media (max-width: 991.98px){
+      #navMenu .navbar-nav { justify-content:flex-start; row-gap:.25rem; }
+      .navbar-nav .nav-link { width:100%; border-radius:.35rem; font-size:1rem; padding:.5rem .75rem !important; }
+    }
+
+    /* ===== HERO (compact) ===== */
+    .hero{
+      position:relative; text-align:center; color:#fff; isolation:isolate;
+      padding: 48px 16px;
+    }
+    .hero::before{ content:""; position:absolute; inset:0; z-index:-1; }
+    .hero h1{ font-size: clamp(1.7rem, 3vw, 2.3rem); margin-bottom:.4rem; text-shadow:2px 2px 4px rgba(0,0,0,.6); }
+    .hero p{ opacity:.95; margin-bottom:0; }
+
+    /* ===== BLOG GRID ===== */
+    .blog-wrapper{ padding: 20px 0 32px; }
+    .card-post{
+      background: rgba(255,255,255,.96);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:14px; overflow:hidden;
+      box-shadow:0 6px 14px rgba(0,0,0,.1);
+      transition: transform .18s ease, box-shadow .18s ease;
+      height: 100%;
+    }
+    .card-post:hover{ transform: translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,.14); }
+    .card-post .card-img-top{ aspect-ratio: 16/10; object-fit: cover; }
+    .card-post .card-body{ padding: 14px; }
+    .card-post .card-title{ margin-bottom: .35rem; font-weight: 800; font-size: 1.05rem; }
+    .card-post .card-text{ color:#475569; }
+
+    /* ===== FOOTER ===== */
+    footer{ background:whitesmoke; color:black; text-align:center; padding:12px; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / NAV (fixed — will not hide while scrolling) -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Health &amp; Fitness</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav mx-auto">
+            <!-- Keep same set/order as your other pages -->
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="nutrition.html">Nutrition Tips</a></li>
+            <li class="nav-item"><a class="nav-link" href="workouts.html">Workout Routines</a></li>
+            <li class="nav-item"><a class="nav-link" href="mental-health.html">Mental Wellness</a></li>
+            <li class="nav-item"><a class="nav-link" href="weight-loss.html">Weight Loss Tips</a></li>
+            <li class="nav-item"><a class="nav-link" href="yoga.html">Yoga Guides</a></li>
+            <li class="nav-item"><a class="nav-link" href="recipes.html">Healthy Recipes</a></li>
+            <li class="nav-item"><a class="nav-link" href="post1.html">Home Workouts</a></li>
+            <li class="nav-item"><a class="nav-link" href="post2.html">Stay Active</a></li>
+            <li class="nav-item"><a class="nav-link" href="post3.html">Meals</a></li>
+            <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy Policy</a></li>
+            <li class="nav-item"><a class="nav-link" href="terms.html">Terms &amp; Conditions</a></li>
+            <li class="nav-item"><a class="nav-link" href="sitemap.html">Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <h1>Blog</h1>
+        <p>Latest posts on workouts, nutrition, and mental wellness.</p>
+      </div>
+    </section>
+
+    <!-- BLOG GRID -->
+    <section class="blog-wrapper">
+      <div class="container" style="max-width: 1100px;">
+        <div class="row g-3">
+          <!-- Post card -->
+          <div class="col-sm-6 col-lg-4">
+            <article class="card card-post h-100">
+              <img src="images/nutrition-wins.jpg" class="card-img-top" alt="Healthy foods on a table">
+              <div class="card-body">
+                <h5 class="card-title">10 Easy Nutrition Wins</h5>
+                <p class="card-text">Small changes you can make this week for more energy and better recovery.</p>
+                <a href="post1.html" class="btn btn-primary btn-sm">Read Post</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Duplicate/adjust for more posts -->
+          <div class="col-sm-6 col-lg-4">
+            <article class="card card-post h-100">
+              <img src="images/fit.jpg" class="card-img-top" alt="Home workout session">
+              <div class="card-body">
+                <h5 class="card-title">20‑Minute Home Workout</h5>
+                <p class="card-text">A no‑equipment routine you can do in your living room—perfect for busy days.</p>
+                <a href="post2.html" class="btn btn-primary btn-sm">Read Post</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <article class="card card-post h-100">
+              <img src="images/meal-prep.webp" class="card-img-top" alt="Meal prep bowls">
+              <div class="card-body">
+                <h5 class="card-title">Budget Meal Prep</h5>
+                <p class="card-text">Tasty high‑protein meals that won’t break the bank—prep once, eat all week.</p>
+                <a href="post3.html" class="btn btn-primary btn-sm">Read Post</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Add more posts as needed -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Health &amp; Fitness Blog</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Highlight "Blog" in nav based on URL
+    (function(){
+      const current = location.pathname.split('/').pop() || 'blog.html';
+      document.querySelectorAll('.navbar-nav .nav-link').forEach(a=>{
+        if(a.getAttribute('href') && a.getAttribute('href').endsWith(current)){
+          a.classList.add('active');
+        }
+      });
+    })();
+
+    // Keep navbar fixed & ensure correct top spacing:
+    // - Detect actual navbar height (including when it wraps to two lines)
+    // - Update CSS variable so body padding matches it
+    (function(){
+      const navbar = document.querySelector('.navbar');
+      const setSpace = () => {
+        const h = navbar.offsetHeight;
+        document.documentElement.style.setProperty('--nav-h', h + 'px');
+      };
+      window.addEventListener('load', setSpace);
+      window.addEventListener('resize', setSpace);
+      const collapse = document.getElementById('navMenu');
+      collapse.addEventListener('shown.bs.collapse', setSpace);
+      collapse.addEventListener('hidden.bs.collapse', setSpace);
+      // Fallback periodic check (covers font swap, two-line wrap, etc.)
+      let lastH = 0;
+      setInterval(() => {
+        const h = navbar.offsetHeight;
+        if (h !== lastH) { lastH = h; setSpace(); }
+      }, 600);
+    })();
+  </script>
+</body>
+</html>
